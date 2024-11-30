@@ -1,0 +1,8 @@
+#!/bin/bash
+
+docker pull swift
+
+trap 'docker rm -f $(docker ps -q --filter ancestor=swift-mem)' SIGINT
+
+docker build -t swift-mem .
+docker run --rm swift-mem
